@@ -1,3 +1,4 @@
+import { AxiosError } from "axios";
 import { productsApi } from "./api/products.api";
 
 async function getProducts(){
@@ -19,6 +20,24 @@ async function getOneProduct(){
     console.log(response.data);
 }
 
+/*
+{
+  "id": 1,
+  "name": "Notebook Gamer",
+  "description": "Notebook gamer top",
+  "price": 3000,
+  "createdAt": "2024-07-29T21:44:23.601Z"
+}
+*/
+
+interface IProduct{
+    id: number;
+    name: string;
+    description?: string;
+    price: number;
+    createdAt: Date;
+}
+
 async function createProduct(){
     // Comportamentos de sucesso e erro
     try {
@@ -28,11 +47,15 @@ async function createProduct(){
         }
     
         // POST, PUT e PATCH
-        const response = await productsApi.post("/products", body);
+        const response = await productsApi.post<IProduct>("/products", body);
     
         console.log(response.data);
     } catch (error) {
-        console.log("--Ocorreu um erro--");
+        if(error instanceof AxiosError){
+            const currentError = error as AxiosError<{ error: string }>;
+            console.log(currentError.response?.data.error);
+        }
+        
         console.log(error);
     }   
 }
