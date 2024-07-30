@@ -2,6 +2,9 @@ import { productsApi } from "./api/products.api";
 
 async function getProducts(){
     const response = await productsApi.get("/products", {
+        /* headers: {
+            Authorization: "abc123"
+        }, */
         params: {
             search: "note"
         }
