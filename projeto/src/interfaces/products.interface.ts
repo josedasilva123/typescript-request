@@ -11,3 +11,7 @@ export type TCreateProductBody = Pick<
   IProduct,
   "name" | "description" | "price"
 >;
+
+export type TUpdateProductBody = Partial<
+  Pick<IProduct, "name" | "description" | "price">
+>;
