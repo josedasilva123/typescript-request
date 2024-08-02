@@ -9,7 +9,13 @@ async function init(){
     });
     */
 
+    /*
     const data = await productsRequest.getMany({ count: 1, skip: 1 });
+
+    console.log(data);
+    */
+
+    const data = await productsRequest.getOne(3);
 
     console.log(data);
 }

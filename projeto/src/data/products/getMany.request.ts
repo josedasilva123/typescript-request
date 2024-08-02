@@ -12,7 +12,7 @@ interface Response {
   pagedResults: IProduct[];
 }
 
-export async function getMany(params: Params = {}) {
+export async function getMany(params: Params = {}): Promise<Response | null> {
   try {
     const response = await productsApi.get<Response>("/products", {
       params,
